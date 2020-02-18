@@ -19,8 +19,8 @@ export const FileInput = ({ onSubmit, ...restProps }: any) => {
 
   return (
     <form onSubmit={Submit} onChange={onChange} {...restProps}>
-      <input type="text" name="text" />
-      <br />
+      {/* <input type="text" name="text" />
+      <br /> */}
       <input type="file" id="input-file" name="files" multiple />
       <br />
       <input type="submit" />
