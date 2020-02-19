@@ -15,15 +15,20 @@ function App() {
     [singleThreadTime, setSTime] = useState();
 
   function readFiles(e: any, { files = [] } = {}) {
-    const start = new Date().getTime();
-    Promise.all(ReadFilesSingleThread(files)).then(results => {
-      setSTime(new Date().getTime() - start);
-      setFiles(results);
-    });
+    let start = Date.now()
+    // Promise.all(ReadFilesSingleThread(files)).then(results => {
+    //   setSTime(Date.now()- start);
+    //   setFiles(results);
+    // }).catch(err=>console.error(err));
     Promise.all(ReadFilesMultiThread(files)).then(results => {
-      setMTime(new Date().getTime() - start);
-      setFiles(results);
-    });
+      setMTime(Date.now() - start);
+      // setFiles(results);
+      start = Date.now()
+      Promise.all(ReadFilesSingleThread(files)).then(results => {
+        setSTime(Date.now()- start);
+        // setFiles(results);
+      }).catch(err=>console.error(err));
+    }).catch(err=>console.error(err));
 
   }
 
